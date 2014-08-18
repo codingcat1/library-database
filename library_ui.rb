@@ -81,7 +81,7 @@ def book_menu(book)
     end
     puts "What book would you like to view authors for?"
     book_choice = gets.response
-    @books[book_choice].id
+    @books[book_choice].get_authors
 
 
   elsif book_menu_choice == '3'
