@@ -24,7 +24,17 @@ class Book
     self.name == another_book.name
   end
 
+  def add_author(author_id)
+    DB.exec("INSERT INTO join_table (authors_id, books_id) VALUES (#{author_id}, #{@id});")
+  end
 
-
-
+  def get_authors
+    @authors_id = []
+    results = DB.exec("SELECT authors.* FROM books JOIN join_table ON (join_table.books_id = books_id)
+                      JOIN authors ON (join_table.authors_id = authors_id) WHERE books.id = #{@id};")
+    results.each do |result|
+      @authors_id << Author.new({:id => result['id'], :name => result['name']})
+    end
+    @authors_id
+  end
 end

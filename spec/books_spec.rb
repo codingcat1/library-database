@@ -30,4 +30,12 @@ describe Book do
     expect(test_book.id).to be_an_instance_of Fixnum
   end
 
+  it "adds authors to a book" do
+    test_book = Book.new({:name => 'LOTR'})
+    test_book.save
+    test_author = Author.new({:name => 'Tolkien'})
+    test_author.save
+    test_book.add_author(test_author.id)
+    expect(test_book.get_authors).to eq [test_author]
+  end
 end
