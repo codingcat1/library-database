@@ -6,4 +6,7 @@ class Author
     @name = attributes[:name]
   end
 
+  def self.all
+    @authors = []
+  end
 end
