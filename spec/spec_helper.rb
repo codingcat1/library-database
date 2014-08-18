@@ -4,7 +4,7 @@ require 'authors'
 require 'books'
 require 'pg'
 
-DB = PG.connect({:dbname => 'test_library'})
+DB = PG.connect({:dbname => 'library'})
 
 RSpec.configure do |config|
   config.after(:each) do
