@@ -1,26 +1,29 @@
 class Book
-  attr_accessor :name
+  attr_accessor :name, :id
 
   def initialize(attributes)
     @name = attributes[:name]
+    @id = attributes[:id]
   end
 
   def self.all
     @books = []
     results = DB.exec("SELECT * FROM books;")
     results.each do |result|
-      @books << Book.new({:name => result['name']})
+      @books << Book.new({:name => result['name'], :id => result['id']})
     end
     @books
   end
 
   def save
-    results = DB.exec("INSERT INTO books (name) VALUES ('#{@name}') ;")
+    results = DB.exec("INSERT INTO books (name) VALUES ('#{@name}') RETURNING id;")
+    @id = results.first['id'].to_i
   end
 
   def ==(another_book)
     self.name == another_book.name
   end
+
 
 
 

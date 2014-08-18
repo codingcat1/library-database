@@ -23,4 +23,11 @@ describe Book do
     test_book2 = Book.new({:name => 'LOTR'})
     expect(test_book1).to eq test_book2
   end
+
+  it "sets an ID when you save it" do
+    test_book = Book.new({:name => 'LOTR'})
+    test_book.save
+    expect(test_book.id).to be_an_instance_of Fixnum
+  end
+
 end
