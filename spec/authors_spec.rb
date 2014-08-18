@@ -23,4 +23,10 @@ describe Author do
     expect(test_author1).to eq test_author2
   end
 
+  it "sets an ID when you save it" do
+    test_author = Author.new({:name => 'Tolkien'})
+    test_author.save
+    expect(test_author.id).to be_an_instance_of Fixnum
+  end
+
 end

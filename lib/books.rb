@@ -3,7 +3,7 @@ class Book
 
   def initialize(attributes)
     @name = attributes[:name]
-    @id = attributes[:id]
+    @id = attributes[:id].to_i
   end
 
   def self.all

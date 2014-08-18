@@ -1,22 +1,24 @@
 class Author
 
-  attr_accessor :name
+  attr_accessor :name, :id
 
   def initialize(attributes)
     @name = attributes[:name]
+    @id = attributes[:id].to_i
   end
 
   def self.all
     @authors = []
     results = DB.exec("SELECT * FROM authors;")
     results.each do |result|
-      @authors << Author.new({:name => result['name']})
+      @authors << Author.new({:name => result['name'], :id => result['id']})
     end
     @authors
   end
 
   def save
-    results = DB.exec("INSERT INTO authors (name) VALUES ('#{@name}');")
+    results = DB.exec("INSERT INTO authors (name) VALUES ('#{@name}') RETURNING id;")
+    @id = results.first['id'].to_i
   end
 
   def ==(another_author)
