@@ -38,13 +38,23 @@ class Book
   end
 
   def get_authors
-    @authors_id = []
-    results = DB.exec("SELECT authors.* FROM books JOIN join_table ON (join_table.books_id = books_id)
-                      JOIN authors ON (join_table.authors_id = authors_id) WHERE books.id = #{@id};")
+    @authors = []
+    results = DB.exec("SELECT authors.* FROM books JOIN join_table ON (join_table.book_id = books.id)
+                      JOIN authors ON (join_table.authors_id = authors.id) WHERE books.id = #{@id};")
     results.each do |result|
-      @authors_id << Author.new({:id => result['id'], :name => result['name']})
+      @authors << Author.new({:id => result['id'], :name => result['name']})
     end
-    @authors_id
+    @authors
   end
 
 end
+
+
+
+
+
+
+
+
+
+
