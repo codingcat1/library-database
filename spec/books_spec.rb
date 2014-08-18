@@ -38,4 +38,12 @@ describe Book do
     test_book.add_author(test_author.id)
     expect(test_book.get_authors).to eq [test_author]
   end
+
+  describe '.find' do
+    it 'returns the book from the database with the matching id' do
+      test_book = Book.new({:name =>'LOTR', :id => 1})
+      test_book.save
+      expect(Book.find(test_book.id)).to eq test_book
+    end
+  end
 end

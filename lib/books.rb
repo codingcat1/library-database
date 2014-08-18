@@ -15,6 +15,11 @@ class Book
     @books
   end
 
+  def self.find(search_id)
+    results = DB.exec("SELECT * FROM books WHERE id = #{search_id};")[0]
+    Book.new({:name => results['name'], :id => results['id']})
+  end
+
   def save
     results = DB.exec("INSERT INTO books (name) VALUES ('#{@name}') RETURNING id;")
     @id = results.first['id'].to_i
@@ -37,4 +42,5 @@ class Book
     end
     @authors_id
   end
+
 end
