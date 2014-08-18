@@ -29,4 +29,12 @@ describe Author do
     expect(test_author.id).to be_an_instance_of Fixnum
   end
 
+  # describe '.find' do
+  it 'returns the author from the database with the matching id' do
+    test_author = Author.new({:name =>'Tolkien', :id => 1})
+    test_author.save
+    expect(Author.find(test_author.id)).to eq test_author
+  end
+  # end
+
 end

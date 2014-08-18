@@ -16,6 +16,11 @@ class Author
     @authors
   end
 
+  def self.find(search_id)
+    results = DB.exec("SELECT * FROM authors WHERE id = #{search_id};")[0]
+    Author.new({:name => results['name'], :id => results['id']})
+  end
+
   def save
     results = DB.exec("INSERT INTO authors (name) VALUES ('#{@name}') RETURNING id;")
     @id = results.first['id'].to_i
