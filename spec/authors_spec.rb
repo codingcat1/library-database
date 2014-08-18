@@ -37,4 +37,14 @@ describe Author do
   end
   # end
 
+  it "will delete an instance of the author" do
+    test_author = Author.new({:name => 'Tolkien'})
+    test_author.save
+    test_author1 = Author.new({:name => 'J.K. Rowling'})
+    test_author1.save
+    test_author.delete
+    expect(Author.all).to eq [test_author1]
+  end
+
+
 end
