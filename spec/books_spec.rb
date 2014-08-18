@@ -46,4 +46,13 @@ describe Book do
       expect(Book.find(test_book.id)).to eq test_book
     end
   # end
+
+  it "will delete an instance of the book" do
+    test_book = Book.new({:name => 'LOTR'})
+    test_book.save
+    test_book1 = Book.new({:name => 'Harry Potter'})
+    test_book1.save
+    test_book.delete
+    expect(Book.all).to eq [test_book1]
+  end
 end

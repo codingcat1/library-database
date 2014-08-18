@@ -25,6 +25,10 @@ class Book
     @id = results.first['id'].to_i
   end
 
+  def delete
+    DB.exec("DELETE FROM books WHERE id = #{@id};")
+  end
+
   def ==(another_book)
     self.name == another_book.name
   end

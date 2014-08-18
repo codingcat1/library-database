@@ -30,4 +30,5 @@ class Author
     self.name == another_author.name
   end
 
+
 end
