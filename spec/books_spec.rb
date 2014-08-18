@@ -11,4 +11,16 @@ describe Book do
   it "starts with an empty array of books" do
     expect(Book.all).to eq []
   end
+
+  it "adds a book and saves it" do
+    test_book = Book.new({:name => 'LOTR'})
+    test_book.save
+    expect(Book.all).to eq [test_book]
+  end
+
+  it "returns true if two books have the same attributes" do
+    test_book1 = Book.new({:name => 'LOTR'})
+    test_book2 = Book.new({:name => 'LOTR'})
+    expect(test_book1).to eq test_book2
+  end
 end
